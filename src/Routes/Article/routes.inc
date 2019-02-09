@@ -6,8 +6,4 @@
  * @license   [[LICENSE_URL]] ([[LICENSE]])
  *------------------------------------------------------------- *)
 
-{%dependencies.inc}
-
-{---put your dependencies registration here---}
-
-container.add('articleModel', TArticleModelFactory.create());
+router.get('/article', container.get('articleController') as IRouteHandler);

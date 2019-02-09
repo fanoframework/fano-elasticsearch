@@ -41,6 +41,15 @@
 #----------------------------------------------
 -Fu$USER_APP_DIR$/Dependencies
 -Fu$USER_APP_DIR$/Routes
+-Fu$USER_APP_DIR$/App/Article/Controllers
+-Fu$USER_APP_DIR$/App/Article/Controllers/Factories
+-Fu$USER_APP_DIR$/App/Article/Views
+-Fu$USER_APP_DIR$/App/Article/Views/Factories
+-Fu$USER_APP_DIR$/App/Article/Models
+-Fu$USER_APP_DIR$/App/Article/Models/Factories
+
+
+
 #-Fu$USER_APP_DIR$/path/to/other/units
 #-Fu$USER_APP_DIR$/path/to/other/units
 
