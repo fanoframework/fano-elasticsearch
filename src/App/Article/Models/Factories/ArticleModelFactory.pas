@@ -36,10 +36,8 @@ uses
     ArticleModel;
 
     function TArticleModelFactory.build(const container : IDependencyContainer) : IDependency;
-    var db : IRdbms;
     begin
         {---initialize database here---}
-        { db := container.get('db') as IRdbms;}
-        result := TArticleModel.create(db);
+        result := TArticleModel.create('http://localhost:9200', container.get('httpGet') as IHttpGetClient);
     end;
 end.

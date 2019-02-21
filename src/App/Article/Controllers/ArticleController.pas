@@ -23,24 +23,9 @@ type
      *
      * @author [[AUTHOR_NAME]] <[[AUTHOR_EMAIL]]>
      *------------------------------------------------*)
-    TArticleController = class(TRouteHandler, IDependency)
-    public
-        function handleRequest(
-            const request : IRequest;
-            const response : IResponse
-        ) : IResponse; override;
+    TArticleController = class(TController, IDependency)
     end;
 
 implementation
-
-    function TArticleController.handleRequest(
-          const request : IRequest;
-          const response : IResponse
-    ) : IResponse;
-    begin
-        {---put your code here---}
-        //response.body().write('nice');
-        result := response;
-    end;
 
 end.

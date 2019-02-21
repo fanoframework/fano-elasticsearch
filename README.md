@@ -8,18 +8,44 @@ command line tools to help scaffolding web application using Fano Framework.
 ## Requirement
 
 - [Free Pascal](https://www.freepascal.org/) >= 3.0
+- libCurl development
 - Web Server (Apache, nginx)
 - [Fano Web Framework](https://github.com/fanoframework/fano)
 
 ## Installation
 
+
 ### Build
+
+#### libcurl development package installation
+
+Check if libcurl package for development is installed by running `curl-config`.
+
+```
+$ curl-config --version
+```
+If libcurl installed you will get something like `libcurl x.xx.x` where `x.xx.x` is version. For example `libcurl 7.47.0` otherwise you get
+
+```
+The program 'curl-config' can be found in the following packages:
+ * libcurl4-gnutls-dev
+ * libcurl4-nss-dev
+ * libcurl4-openssl-dev
+Try: sudo apt install <selected package>
+```
+
+In case not installed, run
+```
+$ sudo apt install libcurl4-gnutls-dev
+```
+
+#### Free Pascal installation
 
 Make sure [Free Pascal](https://www.freepascal.org/) is installed. Run
 
     $ fpc -i
 
-If you see something like `Free Pascal Compiler version 3.0.4`,  you are good to go.
+If you see something like `Free Pascal Compiler version 3.x.x`,  you are good to go.
 
 Clone this repository
 

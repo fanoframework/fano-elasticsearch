@@ -10,4 +10,5 @@
 
 {---put your dependencies registration here---}
 
+container.add('httpGet', THttpGetFactory.create());
 container.add('articleModel', TArticleModelFactory.create());

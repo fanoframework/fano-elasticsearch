@@ -41,7 +41,9 @@ uses
         try
             result := TArticleController.create(
                 routeMiddlewares.getBefore(),
-                routeMiddlewares.getAfter()
+                routeMiddlewares.getAfter(),
+                container.get('articleView') as IView,
+                container.get('viewParams') as IViewParameters
             );
         finally
             routeMiddlewares := nil;

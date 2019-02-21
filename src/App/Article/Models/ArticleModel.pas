@@ -14,6 +14,7 @@ interface
 
 uses
 
+    fpjson,
     fano;
 
 type
@@ -25,10 +26,12 @@ type
      *------------------------------------------------*)
     TArticleModel = class(TInjectableObject, IModelReader, IModelReadOnlyData)
     private
-        rdbmsInstance : IRdbms;
-        resultSet : IRdbmsResultSet;
+        apiBaseUrl  : string;
+        httpClient : IHttpGetClient;
+        jsonData : TJSONData;
+        indx : integer;
     public
-        constructor create(const db : IRdbms);
+        constructor create(const baseUrl : string; const http : IHttpGetClient);
         destructor destroy(); override;
 
         function read(const params : IModelWriteOnlyData = nil) : IModelReadOnlyData;
@@ -70,25 +73,34 @@ uses
     Classes,
     SysUtils;
 
-    constructor TArticleModel.create(const db : IRdbms);
+    constructor TArticleModel.create(const baseUrl : string; const http : IHttpGetClient);
     begin
-        rdbmsInstance := db;
-        resultSet := nil;
+        apiBaseUrl := baseUrl;
+        httpClient := http;
+        jsonData := nil;
+        indx := 0;
     end;
 
     destructor TArticleModel.destroy();
     begin
         inherited destroy();
-        rdbmsInstance := nil;
-        resultSet := nil;
+        httpClient := nil;
+        freeAndNil(jsonData);
     end;
 
     function TArticleModel.read(
         const params : IModelWriteOnlyData = nil
     ) : IModelReadOnlyData;
+    var response : IResponseStream;
     begin
-        {---put code to retrieve data from storage here---}
-        //resultSet := rdbmsInstance.prepare('SELECT * FROM articles').execute();
+        if (assigned(jsonData)) then
+        begin
+            freeAndNil(jsonData);
+        end;
+
+        response := httpClient.get(apiBaseUrl + '/books/elasticsearch/1');
+        jsonData := getJSON(response.read());
+
         result := self;
     end;
 
@@ -104,7 +116,7 @@ uses
      *-----------------------------------------------*)
     function TArticleModel.count() : int64;
     begin
-        result := resultSet.resultCount();
+        result := 1;
     end;
 
     (*!------------------------------------------------
@@ -114,7 +126,7 @@ uses
      *-----------------------------------------------*)
     function TArticleModel.eof() : boolean;
     begin
-        result := resultSet.eof();
+        result := (indx = count());
     end;
 
     (*!------------------------------------------------
@@ -124,8 +136,8 @@ uses
      *-----------------------------------------------*)
     function TArticleModel.next() : boolean;
     begin
-        result := not resultSet.eof();
-        resultSet.next();
+        result := not eof();
+        inc(indx);
     end;
 
     (*!------------------------------------------------
@@ -135,6 +147,6 @@ uses
      *-----------------------------------------------*)
     function TArticleModel.readString(const key : string) : string;
     begin
-        result := resultSet.fields().fieldByName(key).asString;
+        result := jsonData.getPath(key).asString;
     end;
 end.

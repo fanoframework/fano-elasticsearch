@@ -31,6 +31,8 @@ uses
      *   controllers factory
      *----------------------------------- *)
     {---- put your controller factory here ---},
+    HeaderViewFactory,
+    FooterViewFactory,
     ArticleControllerFactory,
     ArticleViewFactory,
     ArticleModelFactory;
