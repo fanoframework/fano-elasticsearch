@@ -1,5 +1,0 @@
-{
-    "appName" : "MyApp",
-    "baseUrl" : "http://fano-elastic.zamroni",
-    "elasticsearchUrl" : "http://localhost:9200"
-}
