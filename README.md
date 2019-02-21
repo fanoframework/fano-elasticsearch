@@ -139,7 +139,7 @@ If you get similar JSON output as follows
 then Elasticsearch is running.
 
 Run `tools/seed.data.sh` script to create index and populate sample
-data for this application.
+data for this application. This script assumes that Elasticsearch listening on `localhost` on its default port `9200`.
 
 ## Run
 
