@@ -1,9 +1,9 @@
 (*!------------------------------------------------------------
- * [[APP_NAME]] ([[APP_URL]])
+ * Fano Framework Elasticsearch Sample Application (https://fanoframework.github.io)
  *
- * @link      [[APP_REPOSITORY_URL]]
- * @copyright Copyright (c) [[COPYRIGHT_YEAR]] [[COPYRIGHT_HOLDER]]
- * @license   [[LICENSE_URL]] ([[LICENSE]])
+ * @link      https://github.com/fanoframework/fano-elasticsearch
+ * @copyright Copyright (c) 2019 Zamrony P. Juhara
+ * @license   https://github.com/fanoframework/fano-elasticsearch/blob/master/LICENSE (GPL-3.0)
  *------------------------------------------------------------- *)
 
 {$INCLUDE main.dependencies.inc}
