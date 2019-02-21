@@ -1,6 +1,7 @@
-# Fano Web Framework Skeleton Application
+# Sample Web Application that loads data from Elasticsearch
 
-Web application skeleton using Fano Framework, Pascal web application framework
+Sample MVC web application using Fano Framework, Pascal web application framework. It loads data from Elasticsearch and
+display data to view.
 
 This project is generated using [Fano CLI](https://github.com/fanoframework/fano-cli)
 command line tools to help scaffolding web application using Fano Framework.
@@ -8,12 +9,12 @@ command line tools to help scaffolding web application using Fano Framework.
 ## Requirement
 
 - [Free Pascal](https://www.freepascal.org/) >= 3.0
-- libCurl development
+- [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html)
+- [libCurl development](https://curl.haxx.se/libcurl/)
 - Web Server (Apache, nginx)
 - [Fano Web Framework](https://github.com/fanoframework/fano)
 
 ## Installation
-
 
 ### Build
 
@@ -34,7 +35,7 @@ The program 'curl-config' can be found in the following packages:
 Try: sudo apt install <selected package>
 ```
 
-In case not installed, run
+In case libcurl not installed, run
 ```
 $ sudo apt install libcurl4-gnutls-dev
 ```

@@ -1,1 +1,5 @@
-{ "appName" : "MyApp" }
+{
+    "appName" : "MyApp",
+    "baseUrl" : "http://replace.with.your.own.domain",
+    "elasticsearchUrl" : "http://localhost:9200"
+}

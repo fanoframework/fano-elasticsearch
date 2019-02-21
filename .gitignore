@@ -9,7 +9,7 @@
 #----------------------------------------------
 # Ignore any application configuration
 #----------------------------------------------
-src/config/config.json
+config/config.json
 
 #----------------------------------------------
 # Ignore Apache any configuration
