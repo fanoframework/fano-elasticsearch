@@ -120,6 +120,27 @@ environment variable. By default is `app.cgi` filename.
 
     $ EXEC_OUTPUT_NAME=index.cgi ./build.sh
 
+## Setup Elasticsearch sample data
+
+Make sure Elasticsearch is installed and running. Run
+
+```
+$ curl -X GET "localhost:9200/"
+```
+If you get similar JSON output as follows
+```
+{
+  "name" : "BflSKk1",
+  "cluster_name" : "elasticsearch",
+  ...
+  "tagline" : "You Know, for Search"
+}
+```
+then Elasticsearch is running.
+
+Run `tools/seed.data.sh` script to create index and populate sample
+data for this application.
+
 ## Run
 
 ### Run with a webserver
@@ -182,7 +203,7 @@ application in shell.
 
 or to change route to access, set `REQUEST_URI` variable.
 
-    $ REQUEST_URI=/test/test ./simulate.run.sh
+    $ REQUEST_URI=/test/test ./tools/simulate.run.sh
 
 This is similar to simulating browser requesting this page,for example,
 

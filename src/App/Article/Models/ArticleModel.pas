@@ -29,7 +29,9 @@ type
         apiBaseUrl  : string;
         httpClient : IHttpGetClient;
         jsonData : TJSONData;
-        indx : integer;
+        currentData : TJSONData;
+        totalRecords : integer;
+        cursorPtr : integer;
     public
         constructor create(const baseUrl : string; const http : IHttpGetClient);
         destructor destroy(); override;
@@ -79,7 +81,9 @@ uses
         apiBaseUrl := baseUrl;
         httpClient := http;
         jsonData := nil;
-        indx := 0;
+        currentData := nil;
+        cursorPtr := 0;
+        totalRecords := 0;
     end;
 
     destructor TArticleModel.destroy();
@@ -87,6 +91,7 @@ uses
         inherited destroy();
         httpClient := nil;
         freeAndNil(jsonData);
+        freeAndNil(currentData);
     end;
 
     function TArticleModel.read(
@@ -97,10 +102,18 @@ uses
         if (assigned(jsonData)) then
         begin
             freeAndNil(jsonData);
+            freeAndNil(currentData);
         end;
 
-        response := httpClient.get(apiBaseUrl + '/books/elasticsearch/1');
+        response := httpClient.get(apiBaseUrl + '/_search');
         jsonData := getJSON(response.read());
+        cursorPtr := -1;
+        totalRecords := jsonData.getPath('hits.total').asInteger;
+        if (totalRecords > 0) then
+        begin
+            cursorPtr := 0;
+            currentData := jsonData.getPath('hits.hits[' + intToStr(cursorPtr) +']');
+        end;
 
         result := self;
     end;
@@ -117,7 +130,7 @@ uses
      *-----------------------------------------------*)
     function TArticleModel.count() : int64;
     begin
-        result := 1;
+        result := totalRecords;
     end;
 
     (*!------------------------------------------------
@@ -127,7 +140,7 @@ uses
      *-----------------------------------------------*)
     function TArticleModel.eof() : boolean;
     begin
-        result := (indx = count());
+        result := (cursorPtr >= count());
     end;
 
     (*!------------------------------------------------
@@ -137,8 +150,12 @@ uses
      *-----------------------------------------------*)
     function TArticleModel.next() : boolean;
     begin
+        inc(cursorPtr);
         result := not eof();
-        inc(indx);
+        if (result) then
+        begin
+            currentData := jsonData.getPath('hits.hits[' + intToStr(cursorPtr) +']');
+        end;
     end;
 
     (*!------------------------------------------------
@@ -148,6 +165,6 @@ uses
      *-----------------------------------------------*)
     function TArticleModel.readString(const key : string) : string;
     begin
-        result := jsonData.getPath(key).asString;
+        result := currentData.getPath(key).asString;
     end;
 end.

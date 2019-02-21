@@ -36,8 +36,12 @@ uses
     ArticleModel;
 
     function TArticleModelFactory.build(const container : IDependencyContainer) : IDependency;
+    var config : IAppConfiguration;
     begin
-        {---initialize database here---}
-        result := TArticleModel.create('http://localhost:9200', container.get('httpGet') as IHttpGetClient);
+        config := container.get('config') as IAppConfiguration;
+        result := TArticleModel.create(
+            config.getString('elasticsearch.url') + config.getString('elasticsearch.index'),
+            container.get('httpGet') as IHttpGetClient
+        );
     end;
 end.

@@ -7,6 +7,16 @@
  *------------------------------------------------------------- *)
 
  {-----------------------------------------------
+   register application configuration
+ ------------------------------------------------}
+ container.add(
+     'config',
+     TJsonFileConfigFactory.create(
+         extractFileDir(getCurrentDir()) + '/config/config.json'
+     )
+ );
+
+ {-----------------------------------------------
    register middleware list for each routes that
    does nothing,
    need to be use factory so each route will have
