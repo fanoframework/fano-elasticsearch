@@ -43,7 +43,8 @@ uses
                 routeMiddlewares.getBefore(),
                 routeMiddlewares.getAfter(),
                 container.get('articleView') as IView,
-                container.get('viewParams') as IViewParameters
+                container.get('viewParams') as IViewParameters,
+                container.get('articleModel') as IModelReader
             );
         finally
             routeMiddlewares := nil;

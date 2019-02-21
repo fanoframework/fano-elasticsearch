@@ -71,7 +71,8 @@ implementation
 uses
 
     Classes,
-    SysUtils;
+    SysUtils,
+    jsonparser;
 
     constructor TArticleModel.create(const baseUrl : string; const http : IHttpGetClient);
     begin

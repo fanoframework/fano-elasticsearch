@@ -87,9 +87,9 @@ implementation
             begin
                 respBody.write(
                     '<tr>' +
-                    '<td>' + articleData.readString('id') + '</td>' +
-                    '<td>' + articleData.readString('title') + '</td>' +
-                    '<td>' + articleData.readString('author') + '</td>' +
+                    '<td>' + articleData.readString('_id') + '</td>' +
+                    '<td>' + articleData.readString('_source.name') + '</td>' +
+                    '<td>' + articleData.readString('_source.author') + '</td>' +
                     '</tr>'
                 );
                 articleData.next();
