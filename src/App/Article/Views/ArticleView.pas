@@ -64,7 +64,7 @@ implementation
         const viewParams : IViewParameters;
         const response : IResponse
     ) : IResponse;
-    var articleData : IModelReadOnlyData;
+    var articleData : IModelResultSet;
         respBody : IResponseStream;
     begin
         articleData := articleModel.data();

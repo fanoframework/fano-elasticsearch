@@ -24,7 +24,7 @@ type
      *
      * @author [[AUTHOR_NAME]] <[[AUTHOR_EMAIL]]>
      *------------------------------------------------*)
-    TArticleModel = class(TInjectableObject, IModelReader, IModelReadOnlyData)
+    TArticleModel = class(TInjectableObject, IModelReader, IModelResultSet)
     private
         apiBaseUrl  : string;
         httpClient : IHttpGetClient;
@@ -36,8 +36,8 @@ type
         constructor create(const baseUrl : string; const http : IHttpGetClient);
         destructor destroy(); override;
 
-        function read(const params : IModelWriteOnlyData = nil) : IModelReadOnlyData;
-        function data() : IModelReadOnlyData;
+        function read(const params : IModelParams = nil) : IModelResultSet;
+        function data() : IModelResultSet;
 
         (*!------------------------------------------------
          * get total data
@@ -95,8 +95,8 @@ uses
     end;
 
     function TArticleModel.read(
-        const params : IModelWriteOnlyData = nil
-    ) : IModelReadOnlyData;
+        const params : IModelParams = nil
+    ) : IModelResultSet;
     var response : IResponseStream;
     begin
         if (assigned(jsonData)) then
@@ -118,7 +118,7 @@ uses
         result := self;
     end;
 
-    function TArticleModel.data() : IModelReadOnlyData;
+    function TArticleModel.data() : IModelResultSet;
     begin
         result := self;
     end;
