@@ -105,7 +105,7 @@ uses
             freeAndNil(currentData);
         end;
 
-        response := httpClient.get(apiBaseUrl + '/_search');
+        response := httpClient.get(apiBaseUrl + '/_search', params as ISerializeable);
         jsonData := getJSON(response.read());
         cursorPtr := -1;
         totalRecords := jsonData.getPath('hits.total').asInteger;

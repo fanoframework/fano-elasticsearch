@@ -72,8 +72,7 @@ implementation
         if (articleData.count() > 0) then
         begin
             respBody.write(
-                '<div class="container has-text-centered">' +
-                '<div class="column">' +
+                '<div class="container">' +
                 '<table class="table is-fullwidth is-hoverable">' +
                 '<thead>' +
                   '<tr>' +
@@ -94,7 +93,7 @@ implementation
                 );
                 articleData.next();
             end;
-            respBody.write('</tbody></table></div></div>');
+            respBody.write('</tbody></table></div>');
         end;
         result := response;
     end;

@@ -17,3 +17,10 @@ html,body {
 .hero.is-info.error {
     background-color: #f3440b;
 }
+
+.search-form {
+    margin-bottom : 2.5em;
+}
+.search-form label.label {
+    color : white;
+}

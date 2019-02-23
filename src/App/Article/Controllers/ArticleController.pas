@@ -26,13 +26,15 @@ type
     TArticleController = class(TController, IDependency)
     private
         articleModel : IModelReader;
+        articleParams : IModelParams;
     public
         constructor create(
             const beforeMiddlewares : IMiddlewareCollection;
             const afterMiddlewares : IMiddlewareCollection;
             const viewInst : IView;
             const viewParamsInst : IViewParameters;
-            const model : IModelReader
+            const model : IModelReader;
+            const modelParams : IModelParams
         );
         destructor destroy(); override;
         function handleRequest(
@@ -47,25 +49,31 @@ implementation
         const afterMiddlewares : IMiddlewareCollection;
         const viewInst : IView;
         const viewParamsInst : IViewParameters;
-        const model : IModelReader
+        const model : IModelReader;
+        const modelParams : IModelParams
     );
     begin
         inherited create(beforeMiddlewares, afterMiddlewares, viewInst, viewParamsInst);
         articleModel := model;
+        articleParams := modelParams;
     end;
 
     destructor TArticleController.destroy();
     begin
         inherited destroy();
         articleModel := nil;
+        articleParams := nil;
     end;
 
     function TArticleController.handleRequest(
           const request : IRequest;
           const response : IResponse
     ) : IResponse;
+    var keyword : string;
     begin
-        articleModel.read();
+        keyword := request.getQueryParam('keyword');
+        articleParams.writeString('keyword', keyword);
+        articleModel.read(articleParams);
         result := inherited handleRequest(request, response);
     end;
 

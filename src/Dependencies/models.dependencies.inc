@@ -12,3 +12,4 @@
 
 container.add('httpGet', THttpGetFactory.create());
 container.add('articleModel', TArticleModelFactory.create());
+container.add('articleParams', TArticleParamsFactory.create());

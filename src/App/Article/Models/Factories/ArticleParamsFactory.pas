@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2019 Zamrony P. Juhara
  * @license   https://github.com/fanoframework/fano-elasticsearch/blob/master/LICENSE (GPL-3.0)
  *------------------------------------------------------------- *)
-unit ArticleModelFactory;
+unit ArticleParamsFactory;
 
 interface
 
@@ -15,11 +15,11 @@ uses
 type
 
     (*!-----------------------------------------------
-     * Factory for model TArticleModel
+     * Factory for model TArticleParams
      *
      * @author [[AUTHOR_NAME]] <[[AUTHOR_EMAIL]]>
      *------------------------------------------------*)
-    TArticleModelFactory = class(TFactory)
+    TArticleParamsFactory = class(TFactory)
     public
         function build(const container : IDependencyContainer) : IDependency; override;
     end;
@@ -27,19 +27,13 @@ type
 implementation
 
 uses
-
     {*! -------------------------------
         unit interfaces
     ----------------------------------- *}
-    ArticleModel;
+    ArticleParams;
 
-    function TArticleModelFactory.build(const container : IDependencyContainer) : IDependency;
-    var config : IAppConfiguration;
+    function TArticleParamsFactory.build(const container : IDependencyContainer) : IDependency;
     begin
-        config := container.get('config') as IAppConfiguration;
-        result := TArticleModel.create(
-            config.getString('elasticsearch.url') + config.getString('elasticsearch.index'),
-            container.get('httpGet') as IHttpGetClient
-        );
+        result := TArticleParams.create();
     end;
 end.

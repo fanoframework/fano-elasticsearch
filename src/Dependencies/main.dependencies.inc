@@ -42,3 +42,8 @@
          container.get('router') as IRouteMatcher
      )
  );
+
+ {-----------------------------------------------
+   register key value pair
+ ------------------------------------------------}
+ container.factory('keyValue', TKeyValuePairFactory.create());

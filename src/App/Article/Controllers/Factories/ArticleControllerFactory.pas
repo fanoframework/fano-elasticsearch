@@ -50,7 +50,8 @@ uses
                 routeMiddlewares.getAfter(),
                 container.get('articleView') as IView,
                 viewParams,
-                container.get('articleModel') as IModelReader
+                container.get('articleModel') as IModelReader,
+                container.get('articleParams') as IModelParams
             );
         finally
             routeMiddlewares := nil;
