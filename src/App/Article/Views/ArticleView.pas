@@ -94,6 +94,9 @@ implementation
                 articleData.next();
             end;
             respBody.write('</tbody></table></div>');
+        end else
+        begin
+            respBody.write('<div class="container">No articles matched.</div>');
         end;
         result := response;
     end;
