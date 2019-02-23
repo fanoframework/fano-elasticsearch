@@ -6,5 +6,6 @@
  * @license   https://github.com/fanoframework/fano-elasticsearch/blob/master/LICENSE (GPL-3.0)
  *------------------------------------------------------------- *)
 {---put your routes registration here---}
-{ router.get('/', THomeControllerFactory.create()); }
 {$INCLUDE Article/routes.inc}
+
+router.get('/', container.get('articleController') as IRouteHandler);
