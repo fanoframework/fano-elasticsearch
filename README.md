@@ -10,7 +10,7 @@ command line tools to help scaffolding web application using Fano Framework.
 
 - [Free Pascal](https://www.freepascal.org/) >= 3.0
 - [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html)
-- [libCurl development](https://curl.haxx.se/libcurl/)
+- [libcurl development](https://curl.haxx.se/libcurl/)
 - Web Server (Apache, nginx)
 - [Fano Web Framework](https://github.com/fanoframework/fano)
 
