@@ -37,3 +37,5 @@ container.add('footerView', TFooterViewFactory.create());
 
 container.add('searchForm', TSearchFormViewFactory.create());
 container.add('articleView', TArticleViewFactory.create());
+
+container.add('articlecreateView', TArticleCreateViewFactory.create());

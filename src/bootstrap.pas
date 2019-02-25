@@ -37,7 +37,10 @@ uses
     SearchFormViewFactory,
     ArticleViewFactory,
     ArticleModelFactory,
-    ArticleParamsFactory;
+    ArticleParamsFactory,
+    ArticleCreateControllerFactory,
+    ArticleCreateViewFactory,
+    ArticleCreateModelFactory;
 
 
     procedure TBootstrapApp.buildDependencies(const container : IDependencyContainer);

@@ -11,3 +11,4 @@
 {---put your dependencies registration here---}
 
 container.add('articleController', TArticleControllerFactory.create());
+container.add('articlecreateController', TArticleCreateControllerFactory.create());
