@@ -54,6 +54,15 @@
 -Fu$USER_APP_DIR$/App/ArticleCreate/Views/Factories
 -Fu$USER_APP_DIR$/App/ArticleCreate/Models
 -Fu$USER_APP_DIR$/App/ArticleCreate/Models/Factories
+-Fu$USER_APP_DIR$/App/ArticleSubmit/Controllers
+-Fu$USER_APP_DIR$/App/ArticleSubmit/Controllers/Factories
+-Fu$USER_APP_DIR$/App/ArticleSubmit/Views
+-Fu$USER_APP_DIR$/App/ArticleSubmit/Views/Factories
+-Fu$USER_APP_DIR$/App/ArticleSubmit/Models
+-Fu$USER_APP_DIR$/App/ArticleSubmit/Models/Factories
+
+
+
 
 
 

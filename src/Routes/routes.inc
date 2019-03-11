@@ -10,3 +10,4 @@
 
 router.get('/', container.get('articleController') as IRouteHandler);
 {$INCLUDE ArticleCreate/routes.inc}
+{$INCLUDE ArticleSubmit/routes.inc}

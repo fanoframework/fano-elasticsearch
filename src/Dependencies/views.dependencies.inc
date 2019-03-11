@@ -39,3 +39,4 @@ container.add('searchForm', TSearchFormViewFactory.create());
 container.add('articleView', TArticleViewFactory.create());
 
 container.add('articlecreateView', TArticleCreateViewFactory.create());
+container.add('articlesubmitView', TArticleSubmitViewFactory.create());

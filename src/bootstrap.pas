@@ -40,7 +40,10 @@ uses
     ArticleParamsFactory,
     ArticleCreateControllerFactory,
     ArticleCreateViewFactory,
-    ArticleCreateModelFactory;
+    ArticleCreateModelFactory,
+    ArticleSubmitControllerFactory,
+    ArticleSubmitViewFactory,
+    ArticleSubmitModelFactory;
 
 
     procedure TBootstrapApp.buildDependencies(const container : IDependencyContainer);
