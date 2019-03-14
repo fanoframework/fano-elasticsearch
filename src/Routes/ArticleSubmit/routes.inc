@@ -6,4 +6,4 @@
  * @license   [[LICENSE_URL]] ([[LICENSE]])
  *------------------------------------------------------------- *)
 
-router.get('/articlesubmit', container.get('articlesubmitController') as IRouteHandler);
+router.post('/article/create', container.get('articleSubmitController') as IRouteHandler);

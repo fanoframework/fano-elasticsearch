@@ -15,6 +15,6 @@ container.add('httpPost', THttpPostFactory.create());
 container.add('articleModel', TArticleModelFactory.create());
 container.add('articleParams', TArticleParamsFactory.create());
 
-container.add('articlecreateModel', TArticleCreateModelFactory.create());
+container.add('articleCreateModel', TArticleCreateModelFactory.create());
 
-container.add('articlesubmitModel', TArticleSubmitModelFactory.create());
+container.add('articleSubmitModel', TArticleSubmitModelFactory.create());

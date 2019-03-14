@@ -41,7 +41,9 @@ uses
         try
             result := TArticleSubmitController.create(
                 routeMiddlewares.getBefore(),
-                routeMiddlewares.getAfter()
+                routeMiddlewares.getAfter(),
+                container.get('articleSubmitModel') as IModelWriter,
+                container.get('articleSubmitModel') as IModelParams
             );
         finally
             routeMiddlewares := nil;

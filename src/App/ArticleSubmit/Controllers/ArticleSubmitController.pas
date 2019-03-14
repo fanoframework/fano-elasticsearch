@@ -24,7 +24,17 @@ type
      * @author [[AUTHOR_NAME]] <[[AUTHOR_EMAIL]]>
      *------------------------------------------------*)
     TArticleSubmitController = class(TRouteHandler, IDependency)
+    private
+        model : IModelWriter;
+        params : IModelParams;
     public
+        constructor create(
+            const beforeMiddlewares : IMiddlewareCollection;
+            const afterMiddlewares : IMiddlewareCollection;
+            const modelInst : IModelWriter;
+            const modelParamInst : IModelParams
+        );
+        destructor destroy(); override;
         function handleRequest(
             const request : IRequest;
             const response : IResponse
@@ -33,13 +43,35 @@ type
 
 implementation
 
+    constructor TArticleSubmitController.create(
+        const beforeMiddlewares : IMiddlewareCollection;
+        const afterMiddlewares : IMiddlewareCollection;
+        const modelInst : IModelWriter;
+        const modelParamInst : IModelParams
+    );
+    begin
+        inherited create(beforeMiddlewares, afterMiddlewares);
+        model := modelInst;
+        params := modelParamInst;
+    end;
+
+    destructor TArticleSubmitController.destroy();
+    begin
+        inherited destroy();
+        model := nil;
+        params := nil;
+    end;
+
     function TArticleSubmitController.handleRequest(
           const request : IRequest;
           const response : IResponse
     ) : IResponse;
     begin
-        {---put your code here---}
-        //response.body().write('nice');
+        params.writeString('title', request.getParsedBodyParam('title'));
+        params.writeString('content', request.getParsedBodyParam('content'));
+        params.writeString('author', request.getParsedBodyParam('author'));
+        params.writeString('tags', request.getParsedBodyParam('tags'));
+        model.write(params, params);
         result := response;
     end;
 

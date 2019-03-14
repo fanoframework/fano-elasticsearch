@@ -23,44 +23,33 @@ type
      *
      * @author [[AUTHOR_NAME]] <[[AUTHOR_EMAIL]]>
      *------------------------------------------------*)
-    TArticleSubmitModel = class(TInjectableObject, IModelReader, IModelResultSet)
+    TArticleSubmitModel = class(TInjectableObject, IModelWriter, IModelParams, ISerializeable)
     private
-        rdbmsInstance : IRdbms;
-        resultSet : IRdbmsResultSet;
+        createClient : IHttpPostClient;
+        apiBaseUrl : string;
     public
-        constructor create(const db : IRdbms);
+        constructor create(
+            const baseUrl : string;
+            const createClientInst : IHttpPostClient
+        );
         destructor destroy(); override;
 
-        function read(const params : IModelParams = nil) : IModelResultSet;
-        function data() : IModelResultSet;
-
-        (*!------------------------------------------------
-         * get total data
+        (*!----------------------------------------------
+         * write data to storage
          *-----------------------------------------------
-         * @return total data
+         * @param params parameters related to data being stored
+         * @param data data being stored
+         * @return current instance
          *-----------------------------------------------*)
-        function count() : int64;
+        function write(const params : IModelParams; const data : IModelParams) : IModelWriter;
 
-        (*!------------------------------------------------
-         * test if in end of result set
-         *-----------------------------------------------
-         * @return true if no more record
-         *-----------------------------------------------*)
-        function eof() : boolean;
+        function writeString(const key : shortstring; const value : string) : IModelParams; overload;
+        function writeInteger(const key : shortstring; const value : integer) : IModelParams; overload;
 
-        (*!------------------------------------------------
-         * move data pointer to next record
-         *-----------------------------------------------
-         * @return true if successful, false if no more record
-         *-----------------------------------------------*)
-        function next() : boolean;
+        function readString(const key : shortstring) : string; overload;
+        function readInteger(const key : shortstring) : integer; overload;
 
-        (*!------------------------------------------------
-         * read data from current active record by its name
-         *-----------------------------------------------
-         * @return value in record
-         *-----------------------------------------------*)
-        function readString(const key : string) : string;
+        function serialize() : string;
     end;
 
 implementation
@@ -70,71 +59,71 @@ uses
     Classes,
     SysUtils;
 
-    constructor TArticleSubmitModel.create(const db : IRdbms);
+    constructor TArticleSubmitModel.create(
+        const baseUrl : string;
+        const createClientInst : IHttpPostClient
+    );
     begin
-        rdbmsInstance := db;
-        resultSet := nil;
+        apiBaseUrl := baseUrl;
+        createClient := createClientInst;
     end;
 
     destructor TArticleSubmitModel.destroy();
     begin
         inherited destroy();
-        rdbmsInstance := nil;
-        resultSet := nil;
+        createClient := nil;
     end;
 
-    function TArticleSubmitModel.read(
-        const params : IModelParams = nil
-    ) : IModelResultSet;
+    (*!----------------------------------------------
+     * write data to storage
+     *-----------------------------------------------
+     * @param params parameters related to data being stored
+     * @param data data being stored
+     * @return current instance
+     *-----------------------------------------------*)
+    function TArticleSubmitModel.write(const params : IModelParams; const data : IModelParams) : IModelWriter;
     begin
-        {---put code to retrieve data from storage here---}
-        //resultSet := rdbmsInstance.prepare('SELECT * FROM articlesubmits').execute();
+        createClient.post(apiBaseUrl, self);
+    end;
+
+    function TArticleSubmitModel.writeString(const key : shortstring; const value : string) : IModelParams;
+    begin
+        case key of
+            'title' : title := value;
+            'content' : content := value;
+            'author' : author := value;
+            'tags' : tags := value;
+        end;
         result := self;
     end;
 
-    function TArticleSubmitModel.data() : IModelResultSet;
+    function TArticleSubmitModel.writeInteger(const key : shortstring; const value : integer) : IModelParams;
     begin
+        //not implemented
         result := self;
     end;
 
-    (*!------------------------------------------------
-     * get total data
-     *-----------------------------------------------
-     * @return total data
-     *-----------------------------------------------*)
-    function TArticleSubmitModel.count() : int64;
+    function TArticleSubmitModel.readString(const key : shortstring) : string;
     begin
-        result := resultSet.resultCount();
+        case key of
+            'title' : result := title;
+            'content' : result := content;
+            'author' : result := author;
+            'tags' : result := tags;
+        end;
     end;
 
-    (*!------------------------------------------------
-     * test if in end of result set
-     *-----------------------------------------------
-     * @return true if no more record
-     *-----------------------------------------------*)
-    function TArticleSubmitModel.eof() : boolean;
+    function TArticleSubmitModel.readInteger(const key : shortstring) : integer;
     begin
-        result := resultSet.eof();
+        //not implemented
+        result := 0;
     end;
 
-    (*!------------------------------------------------
-     * move data pointer to next record
-     *-----------------------------------------------
-     * @return true if successful, false if no more record
-     *-----------------------------------------------*)
-    function TArticleSubmitModel.next() : boolean;
+    function TArticleSubmitModel.serialize() : string;
     begin
-        result := not resultSet.eof();
-        resultSet.next();
-    end;
-
-    (*!------------------------------------------------
-     * read data from current active record by its name
-     *-----------------------------------------------
-     * @return value in record
-     *-----------------------------------------------*)
-    function TArticleSubmitModel.readString(const key : string) : string;
-    begin
-        result := resultSet.fields().fieldByName(key).asString;
+        result := format(
+            '{ "title" : "%s", "content" : "%s", "tags" : [%s], "author" : "%s"}',
+            [title, content, tags, author]
+        );
     end;
 end.
