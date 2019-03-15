@@ -36,12 +36,13 @@ uses
     ArticleSubmitModel;
 
     function TArticleSubmitModelFactory.build(const container : IDependencyContainer) : IDependency;
-      var config : IAppConfiguration;
-      begin
-          config := container.get('config') as IAppConfiguration;
-          result := TArticleSubmitModel.create(
-              config.getString('elasticsearch.url') + config.getString('elasticsearch.index'),
-              container.get('httpPost') as IHttpPostClient
-          );
-      end;
+    var config : IAppConfiguration;
+    begin
+        config := container.get('config') as IAppConfiguration;
+        result := TArticleSubmitModel.create(
+            config.getString('elasticsearch.url') + config.getString('elasticsearch.index'),
+            container.get('httpPost') as IHttpPostClient,
+            container.get('httpPost') as IHttpClientHeaders
+        );
+    end;
 end.

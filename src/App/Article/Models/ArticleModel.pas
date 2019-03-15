@@ -94,9 +94,7 @@ uses
         freeAndNil(currentData);
     end;
 
-    function TArticleModel.read(
-        const params : IModelParams = nil
-    ) : IModelResultSet;
+    function TArticleModel.read(const params : IModelParams = nil) : IModelResultSet;
     var response : IResponseStream;
     begin
         if (assigned(jsonData)) then

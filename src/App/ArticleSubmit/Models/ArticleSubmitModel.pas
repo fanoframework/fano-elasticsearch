@@ -26,11 +26,14 @@ type
     TArticleSubmitModel = class(TInjectableObject, IModelWriter, IModelParams, ISerializeable)
     private
         createClient : IHttpPostClient;
+        createHeaders : IHttpClientHeaders;
         apiBaseUrl : string;
+        title, content, tags, author : string;
     public
         constructor create(
             const baseUrl : string;
-            const createClientInst : IHttpPostClient
+            const createClientInst : IHttpPostClient;
+            const createHeadersInst : IHttpClientHeaders
         );
         destructor destroy(); override;
 
@@ -61,17 +64,20 @@ uses
 
     constructor TArticleSubmitModel.create(
         const baseUrl : string;
-        const createClientInst : IHttpPostClient
+        const createClientInst : IHttpPostClient;
+        const createHeadersInst : IHttpClientHeaders
     );
     begin
         apiBaseUrl := baseUrl;
         createClient := createClientInst;
+        createHeaders := createHeadersInst;
     end;
 
     destructor TArticleSubmitModel.destroy();
     begin
         inherited destroy();
         createClient := nil;
+        createHeaders := nil;
     end;
 
     (*!----------------------------------------------
@@ -83,7 +89,9 @@ uses
      *-----------------------------------------------*)
     function TArticleSubmitModel.write(const params : IModelParams; const data : IModelParams) : IModelWriter;
     begin
+        createHeaders.add('Content-Type: application/json').apply();
         createClient.post(apiBaseUrl, self);
+        result := self;
     end;
 
     function TArticleSubmitModel.writeString(const key : shortstring; const value : string) : IModelParams;
@@ -105,6 +113,7 @@ uses
 
     function TArticleSubmitModel.readString(const key : shortstring) : string;
     begin
+        result := '';
         case key of
             'title' : result := title;
             'content' : result := content;
