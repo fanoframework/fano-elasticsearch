@@ -47,3 +47,12 @@
    register key value pair
  ------------------------------------------------}
  container.factory('keyValue', TKeyValuePairFactory.create());
+
+ {-----------------------------------------------
+   register application file logger
+ ------------------------------------------------}
+ container.add('logger',
+     TFileLoggerFactory.create(
+         (container.get('config') as IAppConfiguration).getString('logFile')
+     )
+ );

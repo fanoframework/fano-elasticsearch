@@ -38,7 +38,9 @@ uses
     begin
         config := container.get('config') as IAppConfiguration;
         result := TArticleModel.create(
-            config.getString('elasticsearch.url') + config.getString('elasticsearch.index'),
+            config.getString('elasticsearch.url') +
+            config.getString('elasticsearch.index') +
+            '/elasticsearch',
             container.get('httpGet') as IHttpGetClient
         );
     end;

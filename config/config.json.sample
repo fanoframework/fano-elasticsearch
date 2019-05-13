@@ -4,5 +4,6 @@
     "elasticsearch" : {
         "url" : "http://localhost:9200",
         "index" : "/fano-articles"
-    }
+    },
+    "logFile" : "../storages/logs/app.log"
 }

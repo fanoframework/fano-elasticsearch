@@ -96,6 +96,7 @@ uses
 
     function TArticleModel.read(const params : IModelParams = nil) : IModelResultSet;
     var response : IResponseStream;
+        str : string;
     begin
         if (assigned(jsonData)) then
         begin
@@ -104,6 +105,11 @@ uses
         end;
 
         response := httpClient.get(apiBaseUrl + '/_search', params as ISerializeable);
+        str := response.read();
+        writeln('Content-Type: text/html');
+        writeln();
+        writeln(str);
+        halt(0);
         jsonData := getJSON(response.read());
         cursorPtr := -1;
         totalRecords := jsonData.getPath('hits.total').asInteger;

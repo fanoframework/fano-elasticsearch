@@ -13,7 +13,7 @@
 container.add('httpCurl', THttpCurlFactory.create());
 container.add(
     'httpGet',
-    THttpGetFactory.create(container.get('httpCurl') as IHttpClientHandleAware)
+    THttpGetLogFactory.create(container.get('httpCurl') as IHttpClientHandleAware)
 );
 container.add(
     'httpPost',
