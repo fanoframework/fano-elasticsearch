@@ -50,7 +50,7 @@ If you see something like `Free Pascal Compiler version 3.x.x`,  you are good to
 
 Clone this repository
 
-    $ git clone git@github.com:fanofamework/fano-app.git --recursive
+    $ git clone git@github.com:fanofamework/fano-elasticsearch.git --recursive
 
 `--recursive` is needed so git also pull [Fano](https://github.com/fanoframework/fano) repository.
 
