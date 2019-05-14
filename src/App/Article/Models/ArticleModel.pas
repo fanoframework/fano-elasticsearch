@@ -32,6 +32,8 @@ type
         currentData : TJSONData;
         totalRecords : integer;
         cursorPtr : integer;
+
+        procedure readResponse(const response : IResponseStream);
     public
         constructor create(const baseUrl : string; const http : IHttpGetClient);
         destructor destroy(); override;
@@ -94,9 +96,19 @@ uses
         freeAndNil(currentData);
     end;
 
+    procedure TArticleModel.readResponse(const response : IResponseStream);
+    begin
+        jsonData := getJSON(response.read());
+        totalRecords := jsonData.getPath('hits.total').asInteger;
+        if (totalRecords > 0) then
+        begin
+            cursorPtr := 0;
+            currentData := jsonData.getPath('hits.hits[' + intToStr(cursorPtr) +']');
+        end;
+    end;
+
     function TArticleModel.read(const params : IModelParams = nil) : IModelResultSet;
     var response : IResponseStream;
-        str : string;
     begin
         if (assigned(jsonData)) then
         begin
@@ -105,18 +117,11 @@ uses
         end;
 
         response := httpClient.get(apiBaseUrl + '/_search', params as ISerializeable);
-        str := response.read();
-        writeln('Content-Type: text/html');
-        writeln();
-        writeln(str);
-        halt(0);
-        jsonData := getJSON(response.read());
-        cursorPtr := -1;
-        totalRecords := jsonData.getPath('hits.total').asInteger;
-        if (totalRecords > 0) then
+        cursorPtr := 0;
+        totalRecords := 0;
+        if (response.size() > 0) then
         begin
-            cursorPtr := 0;
-            currentData := jsonData.getPath('hits.hits[' + intToStr(cursorPtr) +']');
+            readResponse(response);
         end;
 
         result := self;
