@@ -9,9 +9,19 @@
 {%dependencies.inc}
 
 {---put your dependencies registration here---}
+container.add('curl', THttpCurlFactory.create());
 
-container.add('httpGet', THttpGetFactory.create());
-container.add('httpPost', THttpPostFactory.create());
+container.add('httpGet',
+    THttpGetFactory.create(
+        container.get('curl') as IHttpClientHandleAware
+    )
+);
+container.add(
+    'httpPost',
+    THttpPostFactory.create(
+        container.get('curl') as IHttpClientHandleAware
+    )
+);
 container.add('articleModel', TArticleModelFactory.create());
 container.add('articleParams', TArticleParamsFactory.create());
 
