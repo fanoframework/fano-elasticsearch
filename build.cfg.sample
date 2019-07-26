@@ -36,6 +36,12 @@
 #-Px86_64
 
 #----------------------------------------------
+# add {$DEFINE LIBCURL}
+# so application can be linked to libcurl library
+#----------------------------------------------
+-dLIBCURL
+
+#----------------------------------------------
 # Application Unit search path
 # USER_APP_DIR is contains user application base directory
 #----------------------------------------------
@@ -60,12 +66,6 @@
 -Fu$USER_APP_DIR$/App/ArticleSubmit/Views/Factories
 -Fu$USER_APP_DIR$/App/ArticleSubmit/Models
 -Fu$USER_APP_DIR$/App/ArticleSubmit/Models/Factories
-
-
-
-
-
-
 
 
 
