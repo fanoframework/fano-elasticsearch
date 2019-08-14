@@ -29,8 +29,7 @@ type
         articleParams : IModelParams;
     public
         constructor create(
-            const beforeMiddlewares : IMiddlewareCollection;
-            const afterMiddlewares : IMiddlewareCollection;
+            const aMiddlewares : IMiddlewareCollectionAware;
             const viewInst : IView;
             const viewParamsInst : IViewParameters;
             const model : IModelReader;
@@ -45,15 +44,14 @@ type
 
 implementation
     constructor TArticleController.create(
-        const beforeMiddlewares : IMiddlewareCollection;
-        const afterMiddlewares : IMiddlewareCollection;
+        const aMiddlewares : IMiddlewareCollectionAware;
         const viewInst : IView;
         const viewParamsInst : IViewParameters;
         const model : IModelReader;
         const modelParams : IModelParams
     );
     begin
-        inherited create(beforeMiddlewares, afterMiddlewares, viewInst, viewParamsInst);
+        inherited create(aMiddlewares, viewInst, viewParamsInst);
         articleModel := model;
         articleParams := modelParams;
     end;

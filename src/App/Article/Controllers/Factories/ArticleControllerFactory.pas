@@ -46,8 +46,7 @@ uses
             viewParams.setVar('baseUrl', config.getString('baseUrl'));
             viewParams.setVar('appName', config.getString('appName'));
             result := TArticleController.create(
-                routeMiddlewares.getBefore(),
-                routeMiddlewares.getAfter(),
+                routeMiddlewares,
                 container.get('articleView') as IView,
                 viewParams,
                 container.get('articleModel') as IModelReader,
