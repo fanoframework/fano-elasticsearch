@@ -23,13 +23,12 @@ type
      *
      * @author [[AUTHOR_NAME]] <[[AUTHOR_EMAIL]]>
      *------------------------------------------------*)
-    TArticleController = class(TController, IDependency)
+    TArticleController = class(TController)
     private
         articleModel : IModelReader;
         articleParams : IModelParams;
     public
         constructor create(
-            const aMiddlewares : IMiddlewareCollectionAware;
             const viewInst : IView;
             const viewParamsInst : IViewParameters;
             const model : IModelReader;
@@ -38,20 +37,20 @@ type
         destructor destroy(); override;
         function handleRequest(
             const request : IRequest;
-            const response : IResponse
+            const response : IResponse;
+            const args : IRouteArgsReader
         ) : IResponse; override;
     end;
 
 implementation
     constructor TArticleController.create(
-        const aMiddlewares : IMiddlewareCollectionAware;
         const viewInst : IView;
         const viewParamsInst : IViewParameters;
         const model : IModelReader;
         const modelParams : IModelParams
     );
     begin
-        inherited create(aMiddlewares, viewInst, viewParamsInst);
+        inherited create(viewInst, viewParamsInst);
         articleModel := model;
         articleParams := modelParams;
     end;
@@ -64,15 +63,16 @@ implementation
     end;
 
     function TArticleController.handleRequest(
-          const request : IRequest;
-          const response : IResponse
+        const request : IRequest;
+        const response : IResponse;
+        const args : IRouteArgsReader
     ) : IResponse;
     var keyword : string;
     begin
         keyword := request.getQueryParam('keyword');
         articleParams.writeString('keyword', keyword);
         articleModel.read(articleParams);
-        result := inherited handleRequest(request, response);
+        result := inherited handleRequest(request, response, args);
     end;
 
 end.

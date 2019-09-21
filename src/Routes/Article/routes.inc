@@ -6,4 +6,4 @@
  * @license   https://github.com/fanoframework/fano-elasticsearch/blob/master/LICENSE (GPL-3.0)
  *------------------------------------------------------------- *)
 
-router.get('/article', container.get('articleController') as IRouteHandler);
+router.get('/article', container.get('articleController') as IRequestHandler);

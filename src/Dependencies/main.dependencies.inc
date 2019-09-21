@@ -17,16 +17,6 @@
  );
 
  {-----------------------------------------------
-   register middleware list for each routes that
-   does nothing,
-   need to be use factory so each route will have
-   different middleware list
-   Replace with TMiddlewareCollectionAwareFactory to support middleware
-   or replace with your own implementation if required
- ------------------------------------------------}
- container.factory('routeMiddlewares', TNullMiddlewareCollectionAwareFactory.create());
-
- {-----------------------------------------------
    register key value pair
  ------------------------------------------------}
  container.factory('keyValue', TKeyValuePairFactory.create());

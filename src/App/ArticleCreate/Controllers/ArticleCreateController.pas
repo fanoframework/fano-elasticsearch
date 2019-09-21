@@ -23,7 +23,7 @@ type
      *
      * @author [[AUTHOR_NAME]] <[[AUTHOR_EMAIL]]>
      *------------------------------------------------*)
-    TArticleCreateController = class(TController, IDependency)
+    TArticleCreateController = class(TController)
     end;
 
 implementation

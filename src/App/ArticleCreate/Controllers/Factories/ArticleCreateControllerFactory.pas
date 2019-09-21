@@ -35,23 +35,16 @@ uses
     ArticleCreateController;
 
     function TArticleCreateControllerFactory.build(const container : IDependencyContainer) : IDependency;
-    var routeMiddlewares : IMiddlewareCollectionAware;
-        viewParams : IViewParameters;
+    var viewParams : IViewParameters;
         config : IAppConfiguration;
     begin
-        routeMiddlewares := container.get('routeMiddlewares') as IMiddlewareCollectionAware;
-        try
-            viewParams := container.get('viewParams') as IViewParameters;
-            config := container.get('config') as IAppConfiguration;
-            viewParams.setVar('baseUrl', config.getString('baseUrl'));
-            viewParams.setVar('appName', config.getString('appName'));
-            result := TArticleCreateController.create(
-                routeMiddlewares,
-                container.get('articlecreateView') as IView,
-                viewParams
-            );
-        finally
-            routeMiddlewares := nil;
-        end;
+        viewParams := container.get('viewParams') as IViewParameters;
+        config := container.get('config') as IAppConfiguration;
+        viewParams.setVar('baseUrl', config.getString('baseUrl'));
+        viewParams.setVar('appName', config.getString('appName'));
+        result := TArticleCreateController.create(
+            container.get('articlecreateView') as IView,
+            viewParams
+        );
     end;
 end.

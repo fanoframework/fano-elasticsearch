@@ -35,25 +35,18 @@ uses
     ArticleController;
 
     function TArticleControllerFactory.build(const container : IDependencyContainer) : IDependency;
-    var routeMiddlewares : IMiddlewareCollectionAware;
-        viewParams : IViewParameters;
+    var viewParams : IViewParameters;
         config : IAppConfiguration;
     begin
-        routeMiddlewares := container.get('routeMiddlewares') as IMiddlewareCollectionAware;
-        try
-            viewParams := container.get('viewParams') as IViewParameters;
-            config := container.get('config') as IAppConfiguration;
-            viewParams.setVar('baseUrl', config.getString('baseUrl'));
-            viewParams.setVar('appName', config.getString('appName'));
-            result := TArticleController.create(
-                routeMiddlewares,
-                container.get('articleView') as IView,
-                viewParams,
-                container.get('articleModel') as IModelReader,
-                container.get('articleParams') as IModelParams
-            );
-        finally
-            routeMiddlewares := nil;
-        end;
+        viewParams := container.get('viewParams') as IViewParameters;
+        config := container.get('config') as IAppConfiguration;
+        viewParams.setVar('baseUrl', config.getString('baseUrl'));
+        viewParams.setVar('appName', config.getString('appName'));
+        result := TArticleController.create(
+            container.get('articleView') as IView,
+            viewParams,
+            container.get('articleModel') as IModelReader,
+            container.get('articleParams') as IModelParams
+        );
     end;
 end.

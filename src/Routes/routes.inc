@@ -8,5 +8,5 @@
 {---put your routes registration here---}
 {$INCLUDE Article/routes.inc}
 
-router.get('/', container.get('articleController') as IRouteHandler);
+router.get('/', container.get('articleController') as IRequestHandler);
 {$INCLUDE ArticleCreate/routes.inc}
