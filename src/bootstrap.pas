@@ -46,7 +46,8 @@ uses
     ArticleParamsFactory,
     ArticleCreateControllerFactory,
     ArticleCreateViewFactory,
-    ArticleCreateModelFactory;
+    ArticleCreateModelFactory,
+    ArticlePostControllerFactory;
 
 
     procedure TAppServiceProvider.register(const container : IDependencyContainer);
