@@ -7,16 +7,6 @@
  *------------------------------------------------------------- *)
 
  {-----------------------------------------------
-   register application configuration
- ------------------------------------------------}
- container.add(
-     'config',
-     TJsonFileConfigFactory.create(
-         extractFileDir(getCurrentDir()) + '/config/config.json'
-     )
- );
-
- {-----------------------------------------------
    register key value pair
  ------------------------------------------------}
  container.factory('keyValue', TKeyValuePairFactory.create());

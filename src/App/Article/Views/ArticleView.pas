@@ -49,8 +49,8 @@ implementation
 
     destructor TArticleView.destroy();
     begin
-        inherited destroy();
         articleModel := nil;
+        inherited destroy();
     end;
 
     (*!------------------------------------------------

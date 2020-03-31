@@ -88,10 +88,11 @@ uses
 
     destructor TArticleModel.destroy();
     begin
-        inherited destroy();
         httpClient := nil;
         freeAndNil(jsonData);
-        freeAndNil(currentData);
+        //no need to free currentData
+        //otherwise we get access violation
+        inherited destroy();
     end;
 
     function TArticleModel.read(
@@ -102,7 +103,8 @@ uses
         if (assigned(jsonData)) then
         begin
             freeAndNil(jsonData);
-            freeAndNil(currentData);
+            //no need to free currentData
+            //otherwise we get access violation
         end;
 
         response := httpClient.get(apiBaseUrl + '/_search', params as ISerializeable);

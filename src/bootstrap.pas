@@ -16,6 +16,8 @@ uses
 type
 
     TAppServiceProvider = class(TBasicAppServiceProvider)
+    protected
+        function buildAppConfig(const container : IDependencyContainer) : IAppConfiguration; override;
     public
         procedure register(const container : IDependencyContainer); override;
     end;
@@ -48,6 +50,17 @@ uses
     ArticleCreateViewFactory,
     ArticleCreateModelFactory;
 
+    function TAppServiceProvider.buildAppConfig(const container : IDependencyContainer) : IAppConfiguration;
+    begin
+        container.add(
+            'config',
+            TJsonFileConfigFactory.create(
+                extractFileDir(getCurrentDir()) + '/config/config.json'
+            )
+        );
+        result := container['config'] as IAppConfiguration;
+
+    end;
 
     procedure TAppServiceProvider.register(const container : IDependencyContainer);
     begin

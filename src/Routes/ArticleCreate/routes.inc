@@ -6,4 +6,4 @@
  * @license   [[LICENSE_URL]] ([[LICENSE]])
  *------------------------------------------------------------- *)
 
-router.get('/article/create', container.get('articlecreateController') as IRequestHandler);
+//router.get('/article/create', container.get('articlecreateController') as IRequestHandler);

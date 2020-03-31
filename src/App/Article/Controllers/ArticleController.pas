@@ -57,9 +57,9 @@ implementation
 
     destructor TArticleController.destroy();
     begin
-        inherited destroy();
         articleModel := nil;
         articleParams := nil;
+        inherited destroy();
     end;
 
     function TArticleController.handleRequest(
