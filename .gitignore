@@ -69,4 +69,4 @@ fp.dir
 #----------------------------------------------
 # Ignore visual studio code generated file
 #----------------------------------------------
-.vscode/
+.vscode
