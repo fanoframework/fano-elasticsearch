@@ -65,3 +65,8 @@ fp.dir
 # Ignore Lazarus local files (user-specific info)
 #----------------------------------------------
 *.lps
+
+#----------------------------------------------
+# Ignore visual studio code generated file
+#----------------------------------------------
+.vscode/
