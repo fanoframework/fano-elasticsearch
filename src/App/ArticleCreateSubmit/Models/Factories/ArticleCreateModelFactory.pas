@@ -34,14 +34,14 @@ uses
         unit interfaces
     ----------------------------------- *}
     ArticleCreateModel;
-
     function TArticleCreateModelFactory.build(const container : IDependencyContainer) : IDependency;
     var config : IAppConfiguration;
     begin
         config := container.get('config') as IAppConfiguration;
         result := TArticleCreateModel.create(
             config.getString('elasticsearch.url') + config.getString('elasticsearch.index'),
-            container.get('httpPost') as IHttpPostClient
+            container.get('httpPost') as IHttpPostClient,
+            container.get('httpPost') as IHttpClientHeaders
         );
     end;
 end.

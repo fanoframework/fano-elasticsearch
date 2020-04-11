@@ -7,6 +7,6 @@
  *------------------------------------------------------------- *)
 
  {-----------------------------------------------
-   register key value pair
+   register model parameter
  ------------------------------------------------}
- container.factory('keyValue', TKeyValuePairFactory.create());
+container.factory('param', TModelParamsFactory.create());

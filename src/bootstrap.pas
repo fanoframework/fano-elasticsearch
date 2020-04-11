@@ -1,9 +1,9 @@
 (*!------------------------------------------------------------
- * Fano Framework Elasticsearch Sample Application (https://fanoframework.github.io)
+ * [[APP_NAME]] ([[APP_URL]])
  *
- * @link      https://github.com/fanoframework/fano-elasticsearch
- * @copyright Copyright (c) 2019 Zamrony P. Juhara
- * @license   https://github.com/fanoframework/fano-elasticsearch/blob/master/LICENSE (GPL-3.0)
+ * @link      [[APP_REPOSITORY_URL]]
+ * @copyright Copyright (c) [[COPYRIGHT_YEAR]] [[COPYRIGHT_HOLDER]]
+ * @license   [[LICENSE_URL]] ([[LICENSE]])
  *------------------------------------------------------------- *)
 unit bootstrap;
 
@@ -15,9 +15,10 @@ uses
 
 type
 
-    TAppServiceProvider = class(TBasicAppServiceProvider)
+    TAppServiceProvider = class(TDaemonAppServiceProvider)
     protected
         function buildAppConfig(const container : IDependencyContainer) : IAppConfiguration; override;
+
     public
         procedure register(const container : IDependencyContainer); override;
     end;
@@ -33,12 +34,8 @@ type
 implementation
 
 uses
-    sysutils
+    sysutils,
 
-    (*! -------------------------------
-     *   controllers factory
-     *----------------------------------- *)
-    {---- put your controller factory here ---},
     HeaderViewFactory,
     FooterViewFactory,
     ArticleControllerFactory,
@@ -48,7 +45,10 @@ uses
     ArticleParamsFactory,
     ArticleCreateControllerFactory,
     ArticleCreateViewFactory,
-    ArticleCreateModelFactory;
+    ArticleCreateModelFactory,
+    ArticleCreateParamsFactory,
+    ArticleCreateSubmitControllerFactory;
+
 
     function TAppServiceProvider.buildAppConfig(const container : IDependencyContainer) : IAppConfiguration;
     begin

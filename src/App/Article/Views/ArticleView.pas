@@ -20,7 +20,7 @@ type
      *
      * @author Zamrony P. Juhara <zamronypj@yahoo.com>
      *------------------------------------------------*)
-    TArticleView = class(TInterfacedObject, IView)
+    TArticleView = class(TInjectableObject, IView)
     private
         articleModel : IModelReader;
     public

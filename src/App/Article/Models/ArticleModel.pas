@@ -90,8 +90,6 @@ uses
     begin
         httpClient := nil;
         freeAndNil(jsonData);
-        //no need to free currentData
-        //otherwise we get access violation
         inherited destroy();
     end;
 
@@ -103,8 +101,6 @@ uses
         if (assigned(jsonData)) then
         begin
             freeAndNil(jsonData);
-            //no need to free currentData
-            //otherwise we get access violation
         end;
 
         response := httpClient.get(apiBaseUrl + '/_search', params as ISerializeable);

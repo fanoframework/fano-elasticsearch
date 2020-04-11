@@ -26,14 +26,19 @@ type
     TArticleCreateModel = class(TInjectableObject, IModelWriter)
     private
         apiBaseUrl : string;
-        httpClient : IHttpPostClient;
+        fHttpClient : IHttpPostClient;
+        fHttpHeaders : IHttpClientHeaders;
     public
-        constructor create(const baseUrl : string; const httpPost : IHttpPostClient);
+        constructor create(
+            const baseUrl : string;
+            const httpPost : IHttpPostClient;
+            const headers : IHttpClientHeaders
+        );
         destructor destroy(); override;
 
         function write(
-            const params : IModelParams = nil;
-            const data : IModelParams = nil
+            const data : IModelParams;
+            const params : IModelParams = nil
         ) : IModelWriter;
     end;
 
@@ -44,25 +49,32 @@ uses
     Classes,
     SysUtils;
 
-    constructor TArticleCreateModel.create(const baseUrl : string; const httpPost : IHttpPostClient);
+    constructor TArticleCreateModel.create(
+        const baseUrl : string;
+        const httpPost : IHttpPostClient;
+        const headers : IHttpClientHeaders
+    );
     begin
         apiBaseUrl := baseUrl;
-        httpClient := httpPost;
+        fHttpClient := httpPost;
+        fHttpHeaders := headers;
     end;
 
     destructor TArticleCreateModel.destroy();
     begin
+        fHttpClient := nil;
+        fHttpHeaders := nil;
         inherited destroy();
-        httpClient := nil;
     end;
 
     function TArticleCreateModel.write(
-        const params : IModelParams = nil;
-        const data : IModelParams = nil
+        const data : IModelParams;
+        const params : IModelParams = nil
     ) : IModelWriter;
     //var response : IResponseStream;
     begin
-        httpClient.post(apiBaseUrl, data as ISerializeable);
+        fHttpHeaders.add('Content-Type', 'application/json');
+        fHttpClient.post(apiBaseUrl + '/_doc', data);
         result := self;
     end;
 
