@@ -23,9 +23,9 @@ type
      *
      * @author [[AUTHOR_NAME]] <[[AUTHOR_EMAIL]]>
      *------------------------------------------------*)
-    TArticleCreateController = class(TController)
-    end;
+    TArticleCreateController = class(TController);
 
 implementation
+
 
 end.

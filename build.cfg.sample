@@ -1,9 +1,9 @@
 #------------------------------------------------------------
-# Fano Framework Elasticsearch Sample Application (https://fanoframework.github.io)
+# [[APP_NAME]] ([[APP_URL]])
 #
-# @link      https://github.com/fanoframework/fano-elasticsearch
-# @copyright Copyright (c) 2019 Zamrony P. Juhara
-# @license   https://github.com/fanoframework/fano-elasticsearch/blob/master/LICENSE (GPL-3.0)
+# @link      [[APP_REPOSITORY_URL]]
+# @copyright Copyright (c) [[COPYRIGHT_YEAR]] [[COPYRIGHT_HOLDER]]
+# @license   [[LICENSE_URL]] ([[LICENSE]])
 #--------------------------------------------------------------
 
 #----------------------------------------------
@@ -58,14 +58,10 @@
 -Fu$USER_APP_DIR$/App/ArticleCreate/Controllers/Factories
 -Fu$USER_APP_DIR$/App/ArticleCreate/Views
 -Fu$USER_APP_DIR$/App/ArticleCreate/Views/Factories
--Fu$USER_APP_DIR$/App/ArticleCreate/Models
--Fu$USER_APP_DIR$/App/ArticleCreate/Models/Factories
-
-
-
-
-
-
+-Fu$USER_APP_DIR$/App/ArticleCreateSubmit/Controllers
+-Fu$USER_APP_DIR$/App/ArticleCreateSubmit/Controllers/Factories
+-Fu$USER_APP_DIR$/App/ArticleCreateSubmit/Models
+-Fu$USER_APP_DIR$/App/ArticleCreateSubmit/Models/Factories
 #-Fu$USER_APP_DIR$/path/to/other/units
 #-Fu$USER_APP_DIR$/path/to/other/units
 

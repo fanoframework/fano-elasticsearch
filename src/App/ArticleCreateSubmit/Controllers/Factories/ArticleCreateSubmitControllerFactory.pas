@@ -5,7 +5,7 @@
  * @copyright Copyright (c) [[COPYRIGHT_YEAR]] [[COPYRIGHT_HOLDER]]
  * @license   [[LICENSE_URL]] ([[LICENSE]])
  *------------------------------------------------------------- *)
-unit ArticleCreateControllerFactory;
+unit ArticleCreateSubmitControllerFactory;
 
 interface
 
@@ -19,7 +19,7 @@ type
      *
      * @author [[AUTHOR_NAME]] <[[AUTHOR_EMAIL]]>
      *------------------------------------------------*)
-    TArticleCreateControllerFactory = class(TFactory, IDependencyFactory)
+    TArticleCreateSubmitControllerFactory = class(TFactory, IDependencyFactory)
     public
         function build(const container : IDependencyContainer) : IDependency; override;
     end;
@@ -32,19 +32,13 @@ uses
     {*! -------------------------------
         unit interfaces
     ----------------------------------- *}
-    ArticleCreateController;
+    ArticleCreateSubmitController;
 
-    function TArticleCreateControllerFactory.build(const container : IDependencyContainer) : IDependency;
-    var viewParams : IViewParameters;
-        config : IAppConfiguration;
-        aview : IView;
+    function TArticleCreateSubmitControllerFactory.build(const container : IDependencyContainer) : IDependency;
     begin
-        viewParams := container['viewParams'] as IViewParameters;
-        config := container['config'] as IAppConfiguration;
-        viewParams['baseUrl'] := config.getString('baseUrl');
-        viewParams['appName'] := config.getString('appName');
-
-        aview := container['articlecreateView'] as IView;
-        result := TArticleCreateController.create(aview, viewParams);
+        result := TArticleCreateSubmitController.create(
+            container['articleCreateModel'] as IModelWriter,
+            container['articleCreateParams'] as IModelParams
+        );
     end;
 end.
