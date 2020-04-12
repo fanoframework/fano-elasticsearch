@@ -15,7 +15,7 @@ uses
 
 type
 
-    TAppServiceProvider = class(TDaemonAppServiceProvider)
+    TAppServiceProvider = class(TBasicAppServiceProvider)
     protected
         function buildAppConfig(const container : IDependencyContainer) : IAppConfiguration; override;
 

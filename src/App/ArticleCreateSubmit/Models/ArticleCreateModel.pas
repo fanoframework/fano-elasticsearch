@@ -73,7 +73,7 @@ uses
     ) : IModelWriter;
     //var response : IResponseStream;
     begin
-        fHttpHeaders.add('Content-Type', 'application/json');
+        fHttpHeaders.add('Content-Type', 'application/json').apply();
         fHttpClient.post(apiBaseUrl + '/_doc', data);
         result := self;
     end;
