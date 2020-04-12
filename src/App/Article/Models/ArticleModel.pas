@@ -111,6 +111,7 @@ uses
         begin
             cursorPtr := 0;
             currentData := jsonData.getPath('hits.hits[' + intToStr(cursorPtr) +']');
+            totalRecords := jsonData.getPath('hits.hits').count;
         end;
 
         result := self;
